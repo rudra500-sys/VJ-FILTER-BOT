@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://i.ibb.co/dJ0gpJf1/photo-2025-06-16-12-07-05-7516517596376596504.jpg" alt="VJ-Filter-Bot Logo">
 </p>
-<h1 align="center">
+< h1 align="center">
   VJ FILTER BOT
 </h1>
 
