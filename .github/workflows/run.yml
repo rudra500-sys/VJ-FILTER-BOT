@@ -1,4 +1,4 @@
-name: Node Runner Bot
+name: VJ Bot Direct Runner
 
 on:
   push:
@@ -13,18 +13,18 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '20'
+          python-version: '3.10'
+          cache: 'pip'
 
-      - name: Install Pytest and Runner Tools
+      - name: Install Requirements
         run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip python3-venv
-          npm install -g pm2
+          python -m pip install --upgrade pip
+          pip install --no-cache-dir -r requirements.txt
 
-      - name: Boot Application
+      - name: Run Telegram Bot
         env:
           API_ID: ${{ secrets.API_ID }}
           API_HASH: ${{ secrets.API_HASH }}
@@ -33,9 +33,5 @@ jobs:
           DATABASE_URI: ${{ secrets.DATABASE_URI }}
           OTHER_DB_URI: ${{ secrets.DATABASE_URI }}
         run: |
-          python3 -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
-          pm2 start bot.py --name "vj-filter-bot" --interpreter ./venv/bin/python3
-          sleep 10
-          pm2 logs --no-daemon
+          echo "Starting the Bot..."
+          python bot.py
